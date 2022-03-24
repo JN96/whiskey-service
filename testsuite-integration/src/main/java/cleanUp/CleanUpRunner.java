@@ -1,9 +1,6 @@
 package cleanUp;
 
 import com.assignment.whiskeyapi.models.Whiskey;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intuit.karate.junit5.Karate;
 import com.intuit.karate.junit5.Karate.Test;
 
@@ -53,9 +50,9 @@ public class CleanUpRunner {
 
     @Test
     public Karate runTest() {
-        final List<Whiskey> whiskeyList = readData(defaultData);
-        // get and delete current data
-        // add default data
+//        final List<Whiskey> whiskeyList = readData(defaultData);
+//        // get and delete current data
+//        // add default data
         return Karate.run("./CleanUp").relativeTo(getClass());
     }
 
@@ -71,15 +68,15 @@ public class CleanUpRunner {
 
     }
 
-    private List<Whiskey> readData(final String uri) {
-        List<Whiskey> whiskeyList = new ArrayList<>();
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            whiskeyList = mapper.readValue(uri, new TypeReference<List<Whiskey>>(){});
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return whiskeyList;
-    }
+//    private List<Whiskey> readData(final String uri) {
+//        List<Whiskey> whiskeyList = new ArrayList<>();
+//        try {
+//            ObjectMapper mapper = new ObjectMapper();
+//            whiskeyList = mapper.readValue(uri, new TypeReference<List<Whiskey>>(){});
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return whiskeyList;
+//    }
 
 }
