@@ -21,7 +21,6 @@
         <eureka.version>3.1.1</eureka.version>
         <spring-cloud.version>2021.0.0</spring-cloud.version>
         <mysql-connector.version>8.0.21</mysql-connector.version>
-        <maven-war-plugin.version>2.1.1</maven-war-plugin.version>
         <start-class>com.assignment.com.assignment.whiskeyapi.WhiskeyApiApplication</start-class>
     </properties>
 
