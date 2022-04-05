@@ -1,0 +1,318 @@
+openapi: 3.0.3
+info:
+  title: Whiskey Service API
+  description: API information for the whiskey service applicaiton.
+  version: 1.0.0
+  contact:
+    name: James Nicholson
+    url:
+    email: a00219437@student.ait.ie
+servers:
+  - url: 'http://localhost:8080/api/'
+    description: Local development server.
+  - url: 'https://cloud-server/api/'
+    description: Cloud production server.
+paths:
+  /whiskeys:
+    get:
+      summary: Return a list of whiskies.
+      description: Returns a list whiskies and also accepts query parameters. Returns an empty array if there are no whiskies found.
+      responses:
+        '200':
+          description: A JSON array of whiskies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Whiskey'
+    post:
+      summary: Create a whiskey.
+      description: Creates a whiskey based on the user provided input.
+      requestBody:
+        required: true
+        description: The request body to be sent to the service which contains the details of the whiskey.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWhiskeyPayload'
+      responses:
+        '200':
+          description: Returns a message saying the whiskey was succesfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceResponse'
+        '400':
+          description: Returns a bad request message if the service cannot read the data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceExceptionResponse'
+  /whiskeys?name=name:
+    get:
+      summary: Return a list of based on the name.
+      description: Returns a list of whiskeys based on the name query parameter. Returns an empty array if there are no whiskies found.
+      parameters:
+         - in: query
+           name: name
+           required: true
+           schema:
+             type: string
+           description: The name of the whiskey i.e. the brand
+           example: Jameson
+      responses:
+        '200':
+          description: A JSON array of whiskies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Whiskey'
+        '404':
+          description: Returns a not found message if the requested whiskey was not found on the path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+  /whiskeys?category=category:
+    get:
+      summary: Return a list of based on the category.
+      description: Returns a list of whiskeys based on the category query parameter. Returns an empty array if there are no whiskies found.
+      parameters:
+        - in: query
+          name: category
+          required: true
+          schema:
+            type: string
+          description: The category of the whiskey e.g. Scotch, Irish
+          example: Irish
+      responses:
+        '200':
+          description: A JSON array of whiskies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Whiskey'
+        '404':
+          description: Returns a not found message if the requested whiskey was not found on the path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+  /whiskeys/{id}:
+    get:
+      summary: Return a single whiskey.
+      description: Returns a whiskey based on the id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the whiskey.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+          example: 2
+      responses:
+        '200':
+          description: A whiskey object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Whiskey'
+        '404':
+          description: Returns a not found message if the requested whiskey was not found on the path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceExceptionResponse'
+    put:
+      summary: Update a whiskey.
+      description: Updates whiskey based on the id sent in the request body.v
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the whiskey.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+          example: 2
+      requestBody:
+        required: true
+        description: The request body to be sent to the service which contains the id and details of the whiskey to be updated.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWhiskeyPayload'
+      responses:
+        '200':
+          description: A whiskey object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceResponse'
+        '400':
+          description: Returns a bad request message if the service cannot read the data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceExceptionResponse'
+        '404':
+          description: Returns a not found message if the requested whiskey was not found on the path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceExceptionResponse'
+
+    delete:
+      summary: Delete a whiskey.
+      description: Deletes a whiskey based on the id in the path.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the whiskey.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+          example: 2
+      responses:
+        '200':
+          description: A whiskey object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceResponse'
+        '400':
+          description: Returns a bad request message if the service cannot read the data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceExceptionResponse'
+        '404':
+          description: Returns a not found message if the requested whiskey was not found on the path.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhiskeyServiceExceptionResponse'
+
+# TODO - updated 400 & 500 responses
+
+components:
+  schemas:
+    Whiskey:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The id of the whiskey.
+          example: 2
+        name:
+          type: string
+          description: The name of the whiskey.
+          example: Jameson
+        optionalName:
+          type: string
+          description: The optional/secondary name of the whiskey.
+          example: Black Barrel
+        origin:
+          type: string
+          description: The origin of the whiskey.
+          example: Ireland
+        category:
+          type: string
+          description: The category of the whiskey.
+          example: Irish
+        description:
+          type: string
+          description: The descritpion of the whiskey.
+          example: Matured in reawakened bourbon barrels, for another level of smoothness. Unique richness with intense vanilla sweetness, pot still spiciness & nutty notes. From our land, to your hand. As we say in Dublin, Sláinte.
+        price:
+          type: number
+          description: The price of the whiskey.
+          example: 50.00
+    CreateWhiskeyPayload:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the whiskey.
+          example: Jameson
+        optionalName:
+          type: string
+          description: The optional/secondary name of the whiskey.
+          example: Black Barrel
+        origin:
+          type: string
+          description: The origin of the whiskey.
+          example: Ireland
+        category:
+          type: string
+          description: The category of the whiskey.
+          example: Irish
+        description:
+          type: string
+          description: The descritpion of the whiskey.
+          example: Matured in reawakened bourbon barrels, for another level of smoothness. Unique richness with intense vanilla sweetness, pot still spiciness & nutty notes. From our land, to your hand. As we say in Dublin, Sláinte.
+        price:
+          type: number
+          description: The price of the whiskey.
+          example: 50.00
+    NotFoundResponse:
+      type: object
+      properties:
+        timestamp:
+          type: timestamp
+          description: The timestmap of the error.
+          example: 2022-01-31T23:32:35.735+00:00
+        status:
+          type: number
+          description: The error response code.
+          example: 404
+        error:
+          type: string
+          description: The error message.
+          example: Not Found
+        path:
+          type: string
+          description: The path which caused the error.
+          example: /api/whiskeys/9
+    WhiskeyServiceExceptionResponse:
+      type: object
+      properties:
+        httpCode:
+          type: integer
+          description: The error code.
+          example: 400
+        method:
+          type: string
+          description: The name of the method.
+          example: methodName
+        descirption:
+          type: string
+          description: The error message provded by the application.
+          example: Unable to get/update/create whiskey.
+        error:
+          type: string
+          description: The error message provded by the stacktrace.
+          example: "t-null property references a null or transient value : com.assignment.whiskeyapi.models.Whiskey.description; nested exception is org.hibernate.PropertyValueException: not-null property references a null or transient value : com.assignment.whiskeyapi.models.Whiskey.description"
+    WhiskeyServiceResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: The error code.
+          example: 200
+        method:
+          type: string
+          description: null
+          example:
+        error:
+          type: string
+          description: null
+          example:
+        descirption:
+          type: string
+          description: The message provded by the application.
+          example: Whiskey was successfully updated/created.

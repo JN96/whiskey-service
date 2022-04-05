@@ -48,7 +48,7 @@ public class WhiskeyRestResource {
      * @param id - the name of the whiskey
      * @return ResponseEntity - Whiskey
      */
-    @GetMapping("/whiskey/{id}")
+    @GetMapping("/whiskeys/{id}")
     public ResponseEntity getWhiskeyById(@PathVariable("id") final Integer id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(whiskeyController.getWhiskeyById(id));
@@ -77,7 +77,7 @@ public class WhiskeyRestResource {
      *
      * @param whiskey - the details of the whiskey to update
      */
-    @PutMapping("/whiskey/{id}")
+    @PutMapping("/whiskeys/{id}")
     public ResponseEntity updateWhiskey(@PathVariable("id") final Integer id, @RequestBody final Whiskey whiskey) {
         try {
             whiskeyController.updateWhiskey(id, whiskey);
@@ -92,7 +92,7 @@ public class WhiskeyRestResource {
      *
      * @param id - the id of the whiskey
      */
-    @DeleteMapping("/whiskey/{id}")
+    @DeleteMapping("/whiskeys/{id}")
     public ResponseEntity deleteWhiskey(@PathVariable("id") final Integer id) {
         try {
             whiskeyController.deleteWhiskey(id);

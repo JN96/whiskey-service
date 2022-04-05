@@ -1,5 +1,5 @@
 # Created by James Nicholson at 20/03/2022
-Feature: GET Response Test
+Feature: GET Requests Test
   Test the responses of GET requests.
 
   Background: Setup the base URL

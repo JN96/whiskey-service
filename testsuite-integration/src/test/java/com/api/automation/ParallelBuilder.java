@@ -1,3 +1,5 @@
+package com.api.automation;
+
 import com.intuit.karate.Runner.Builder;
 import org.junit.jupiter.api.Test;
 

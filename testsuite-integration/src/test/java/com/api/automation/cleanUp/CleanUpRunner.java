@@ -1,6 +1,6 @@
-package cleanUp;
+package com.api.automation.cleanUp;
 
-import com.assignment.whiskeyapi.models.Whiskey;
+//import com.assignment.whiskeyapi.models.Whiskey;
 import com.intuit.karate.junit5.Karate;
 import com.intuit.karate.junit5.Karate.Test;
 
