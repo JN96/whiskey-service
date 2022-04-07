@@ -33,11 +33,11 @@ services:
         condition: service_started
       eureka-discovery-server:
         condition: service_started
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://mysql:3306" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: [ "CMD", "curl", "--fail", "http://localhost:8080/whiskeyapi/api/whiskeys"]
+#      interval: 10s
+#      timeout: 30s
+#      retries: 10
   api-replica:
     build: .
     container_name: whiskey_service_api_replica
@@ -54,8 +54,8 @@ services:
         condition: service_started
       eureka-discovery-server:
         condition: service_started
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://mysql:3306" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: [ "CMD", "curl", "--fail", "http://localhost:8080/whiskeyapi/api/whiskeys"]
+#      interval: 10s
+#      timeout: 30s
+#      retries: 10

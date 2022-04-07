@@ -6,7 +6,7 @@ Feature: PUT Requests Test
     Given url 'http://localhost:8888/whiskeyapi'
 
   Scenario: Update whiskey by Id
-    Given path "/api/whiskeys/4"
+    Given path "/api/whiskeys/103"
     And header Accept = "application/json"
     And header Content-Type = "application/json"
     * def body = read("./data/updateByIdRequestBody.json")
@@ -17,7 +17,7 @@ Feature: PUT Requests Test
     And match response == expectedResponse
 
   Scenario: Check whiskey has been updated correctly
-    Given path "/api/whiskeys/4"
+    Given path "/api/whiskeys/103"
     And header Accept = "application/json"
     When method GET # Send the GET request
     Then status 200 # Send the GET request

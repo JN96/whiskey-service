@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `whiskeys`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `whiskeys` (
-                            `id` int NOT NULL,
+                            `id` int NOT NULL AUTO_INCREMENT,
                             `category` varchar(255) NOT NULL,
                             `description` varchar(255) NOT NULL,
                             `name` varchar(255) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `whiskeys` (
 
 LOCK TABLES `whiskeys` WRITE;
 /*!40000 ALTER TABLE `whiskeys` DISABLE KEYS */;
-INSERT INTO `whiskeys` VALUES (1,'Irish','Charring is an age-old method for invigorating barrels to intensify the taste. Jameson Black Barrel is our tribute to our coopers, who painstakingly give their bourbon barrels an additional charring to reveal their untold richness and complexity. Because ','Jameson','Black Barrel','Ireland',25),(2,'Irish','Tullamore D.E.W. 12 Year Old Special Reserve offers a spice flavour with a robust yet creamy body wrapped in a definite chocolaty note.','Tullamore Dew','12 Year Old Special Reserve','Ireland',50),(3,'Scotch','A legendary malt that is on many people\'s most wanted list. The 16 year old is a true classic from Islay which combines pungent smoke along with complex flavours of dried fruits, spice, malt, vanilla and oak.','Lagavulin','16 Year Old','Scotland',97.5),(4,'Bourbon','Bulleit Rye is an award-winning, straight rye whiskey with a character of unparalleled spice and complexity. Released in 2011, it continues to enjoy recognition as one of the highest quality ryes available.','Bulleit','Rye','USA',50);
+INSERT INTO `whiskeys` VALUES (100,'Irish','Charring is an age-old method for invigorating barrels to intensify the taste. Jameson Black Barrel is our tribute to our coopers, who painstakingly give their bourbon barrels an additional charring to reveal their untold richness and complexity. Because ','Jameson','Black Barrel','Ireland',25),(101,'Irish','Tullamore D.E.W. 12 Year Old Special Reserve offers a spice flavour with a robust yet creamy body wrapped in a definite chocolaty note.','Tullamore Dew','12 Year Old Special Reserve','Ireland',50),(102,'Scotch','A legendary malt that is on many people\'s most wanted list. The 16 year old is a true classic from Islay which combines pungent smoke along with complex flavours of dried fruits, spice, malt, vanilla and oak.','Lagavulin','16 Year Old','Scotland',97.5),(103,'Bourbon','Bulleit Rye is an award-winning, straight rye whiskey with a character of unparalleled spice and complexity. Released in 2011, it continues to enjoy recognition as one of the highest quality ryes available.','Bulleit','Rye','USA',50);
 /*!40000 ALTER TABLE `whiskeys` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

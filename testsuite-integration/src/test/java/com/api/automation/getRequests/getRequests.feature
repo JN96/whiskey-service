@@ -14,7 +14,7 @@ Feature: GET Requests Test
     And match response == expectedResponse
 
   Scenario: Get whiskey by id
-    Given path "/api/whiskey/2"
+    Given path "/api/whiskeys/101"
     And header Accept = "application/json"
     When method GET # Send the GET request
     Then status 200 # Send the GET request

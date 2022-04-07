@@ -1,13 +1,13 @@
 package com.assignment.whiskeyapi.repository;
 
 import com.assignment.whiskeyapi.models.Whiskey;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface WhiskeyRepository extends CrudRepository<Whiskey, Integer> {
+public interface WhiskeyRepository extends JpaRepository<Whiskey, Integer> {
 
     /**
      * Find whiskeys by the category.
