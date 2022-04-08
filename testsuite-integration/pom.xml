@@ -34,12 +34,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.intuit.karate</groupId>
-            <artifactId>karate-junit5</artifactId>
-            <version>1.1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
             <version>5.6.1</version>
@@ -50,30 +44,6 @@
             <version>2.13.1</version>
         </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>staging</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <karate.profile>staging</karate.profile>
-            </properties>
-        </profile>
-        <profile>
-            <id>preprod</id>
-            <properties>
-                <karate.profile>preprod</karate.profile>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <karate.profile>prod</karate.profile>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <testResources>
@@ -101,14 +71,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
-<!--                      <argLine>-Dfile.encoding=UTF-8</argLine>-->
+                      <argLine>-Dfile.encoding=UTF-8</argLine>
                     <includes>
-                        <include>**/ParallelBuilder.java</include>
+                        <include>com.api.automation.SequentialRunner</include>
                     </includes>
                     <rerunFailingTestsCount>2</rerunFailingTestsCount>
-                    <systemProperties>
-                        <karate.env>${karate.profile}</karate.env>
-                    </systemProperties>
                 </configuration>
             </plugin>
         </plugins>
