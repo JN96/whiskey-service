@@ -21,5 +21,5 @@ CMD ["catalina.sh", "run"]
 
 EXPOSE 8888:8080
 
-HEALTHCHECK --interval=5s --timeout=3s CMD wget --quiet --tries=30 --spider http://localhost:8080/whiskeyserviceapi/api/whiskies || exit 1
+#HEALTHCHECK --interval=5s --timeout=3s CMD wget --quiet --tries=30 --spider http://localhost:8080/whiskeyserviceapi/api/whiskies || exit 1
 
