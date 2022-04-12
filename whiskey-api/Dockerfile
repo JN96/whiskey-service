@@ -12,12 +12,11 @@ RUN apt install maven -y && mvn -version
 
 RUN mvn clean package
 
-RUN cp whiskey-api/target/whiskeyapi.war /usr/local/tomcat/webapps/
+RUN cp target/whiskeyapi.war /usr/local/tomcat/webapps/
 
 COPY docker/tomcat/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 
 CMD ["catalina.sh", "run"]
-
 
 EXPOSE 8888:8080
 

@@ -28,6 +28,7 @@
             </properties>
             <modules>
                 <module>whiskey-api</module>
+                <module>whiskey-auth</module>
             </modules>
         </profile>
         <profile>
