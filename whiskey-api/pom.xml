@@ -17,10 +17,12 @@
     <properties>
         <java.version>11</java.version>
         <javax.version>2.1.1</javax.version>
-        <springbootjpa.version>2.6.1</springbootjpa.version>
+        <spring.boot.jpa.version>2.6.1</spring.boot.jpa.version>
+        <spring.security.version>2.6.3</spring.security.version>
+        <spring.oauth2.version>2.2.2.RELEASE</spring.oauth2.version>
         <eureka.version>3.1.1</eureka.version>
-        <spring-cloud.version>2021.0.0</spring-cloud.version>
-        <mysql-connector.version>8.0.21</mysql-connector.version>
+        <spring.cloud.version>2021.0.0</spring.cloud.version>
+        <mysql.connector.version>8.0.21</mysql.connector.version>
         <start-class>com.assignment.whiskeyapi.WhiskeyApiApplication</start-class>
     </properties>
 
@@ -38,7 +40,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${springbootjpa.version}</version>
+            <version>${spring.boot.jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -48,6 +50,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Security Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <version>${spring.oauth2.version}</version>
         </dependency>
 
         <!-- Cloud Config Dependencies -->
@@ -67,7 +81,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector.version}</version>
+            <version>${mysql.connector.version}</version>
         </dependency>
 
         <!-- Tracing Dependencies -->
@@ -100,7 +114,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

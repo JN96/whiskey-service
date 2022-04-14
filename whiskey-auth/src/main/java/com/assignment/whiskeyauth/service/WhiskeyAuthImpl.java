@@ -19,7 +19,6 @@ public class WhiskeyAuthImpl implements WhiskeyAuthController {
     @Override
     public Map getUser(final OAuth2Authentication user) {
         try {
-            logger.info("Retrieving details for user {}.", user.getName());
             final Map<String, Object> userInfo = new HashMap<>();
             userInfo.put("user", user.getUserAuthentication().getPrincipal());
             userInfo.put("authorities", AuthorityUtils.authorityListToSet(

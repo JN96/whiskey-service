@@ -2,7 +2,7 @@ package com.assignment.whiskeyapi.service;
 
 import com.assignment.whiskeyapi.exceptions.ExceptionHandler;
 import com.assignment.whiskeyapi.exceptions.WhiskeyServiceException;
-import com.assignment.whiskeyapi.implementation.WhiskeyController;
+import com.assignment.whiskeyapi.controller.WhiskeyController;
 import com.assignment.whiskeyapi.models.Whiskey;
 import com.assignment.whiskeyapi.repository.WhiskeyRepository;
 import org.slf4j.Logger;

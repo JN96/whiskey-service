@@ -1,4 +1,4 @@
-package com.assignment.whiskeyapi.implementation;
+package com.assignment.whiskeyapi.controller;
 
 import com.assignment.whiskeyapi.exceptions.WhiskeyServiceException;
 import com.assignment.whiskeyapi.models.Whiskey;

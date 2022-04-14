@@ -7,9 +7,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 @Configuration
-public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
+public class JwtConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -17,17 +19,25 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private TokenStore tokenStore;
+
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
     @Override
-    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
+    public void configure(final ClientDetailsServiceConfigurer clientDetailsServiceConfigurer) throws Exception {
+        clientDetailsServiceConfigurer.inMemory()
                 .withClient("whiskeyservice").secret("{noop}TestPassw0rd")
-                .authorizedGrantTypes("password", "client_credentials")
+                .authorizedGrantTypes("refresh_tokens", "password", "client_credentials")
                 .scopes("webclient", "mobileClient");
     }
 
     @Override
-    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager)
+    public void configure(final AuthorizationServerEndpointsConfigurer authorizationServerEndpointsConfigurer) {
+        authorizationServerEndpointsConfigurer.tokenStore(tokenStore)
+                .accessTokenConverter(jwtAccessTokenConverter)
+                .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
 }
