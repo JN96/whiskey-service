@@ -4,11 +4,11 @@ Feature: PUT Requests Test
 
   Background: Setup the base URL
     Given url 'http://localhost:8888/whiskeyapi'
+    * def token = call read('../getToken.feature')
 
   Scenario: Update whiskey by Id
     Given path "/api/whiskeys/103"
-    And header Accept = "application/json"
-    And header Content-Type = "application/json"
+    And headers {Content-Type: 'application/json', Accept: "application/json", Authorization: '#("Bearer " + token.response.access_token)'}
     * def body = read("./data/updateByIdRequestBody.json")
     And request body
     When method PUT # Send the PUT request
@@ -18,7 +18,7 @@ Feature: PUT Requests Test
 
   Scenario: Check whiskey has been updated correctly
     Given path "/api/whiskeys/103"
-    And header Accept = "application/json"
+    And headers {Accept: "application/json", Authorization: '#("Bearer " + token.response.access_token)'}
     When method GET # Send the GET request
     Then status 200 # Send the GET request
     * def expectedResponse = read("./data/updateByIdRequestBody.json")

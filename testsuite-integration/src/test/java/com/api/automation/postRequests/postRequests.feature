@@ -4,11 +4,11 @@ Feature: POST Requests Test
 
   Background: Setup the base URL
     Given url 'http://localhost:8888/whiskeyapi'
+    * def token = call read('../getToken.feature')
 
   Scenario: Create a new whiskey
     Given path "/api/whiskeys"
-    And header Accept = "application/json"
-    And header Content-Type = "application/json"
+    And headers {Content-Type: 'application/json', Accept: "application/json", Authorization: '#("Bearer " + token.response.access_token)'}
     * def body = read("./data/createWhiskeyRequestBody.json")
     And request body
     When method POST # Send the POST request
@@ -19,7 +19,7 @@ Feature: POST Requests Test
   Scenario: Get whiskey by name
     Given path "/api/whiskeys"
     * param name = "Connemara"
-    And header Accept = "application/json"
+    And headers {Accept: "application/json", Authorization: '#("Bearer " + token.response.access_token)'}
     When method GET # Send the GET request
     Then status 200 # Send the GET request
     * def expectedResponse = read("./data/expectedGetWhiskeyByNameResponse.json")

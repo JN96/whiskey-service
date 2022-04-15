@@ -4,10 +4,11 @@ Feature: DELETE Requests Test
 
   Background: Setup the base URL
     Given url 'http://localhost:8888/whiskeyapi'
+    * def token = call read('../getToken.feature')
 
   Scenario: Delete a whiskey
     Given path "/api/whiskeys/101"
-    And header Accept = "application/json"
+    And headers {Accept: "application/json", Authorization: '#("Bearer " + token.response.access_token)'}
     When method DELETE # Send the DELETE request
     Then status 200 # Send the DELETE request
     * def expectedResponse = read("./data/expectedDeleteRequestResponse.json")
