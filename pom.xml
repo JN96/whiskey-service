@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>testsuite-integration</module>
+        <module>zuul-gateway</module>
     </modules>
     <name>whiskey-service</name>
     <url>http://maven.apache.org</url>

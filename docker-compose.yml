@@ -1,5 +1,15 @@
 version: '3'
 services:
+  zuul-gateway:
+    build: zuul-gateway
+    container_name: zuul_gateway
+    ports:
+      - "8886:8080" # map internal 8080 to external 9000
+    environment:
+      server.port=8080:
+      eureka.client.serviceUrl.defaultZone=http://eureka-discovery-server:8761/eureka:
+      zuul.routes.whiskeyapi=/whiskeyapi/**:
+      zuul.routes.whiskeyauth=/whiskeyauth/**:
   mysql:
     build: docker/mysql
     container_name: whiskey_service_database
@@ -29,6 +39,8 @@ services:
       management.endpoints.web.exposure.include=refresh:
       eureka.client.serviceUrl.defaultZone=http://eureka-discovery-server:8761/eureka:
     depends_on:
+      zuul-gateway:
+        condition: service_started
       mysql:
         condition: service_started
       eureka-discovery-server:
@@ -52,6 +64,8 @@ services:
       management.endpoints.web.exposure.include=refresh:
       eureka.client.serviceUrl.defaultZone=http://eureka-discovery-server:8761/eureka:
     depends_on:
+      zuul-gateway:
+        condition: service_started
       mysql:
         condition: service_started
       auth:
@@ -78,6 +92,8 @@ services:
       management.endpoints.web.exposure.include=refresh:
       eureka.client.serviceUrl.defaultZone=http://eureka-discovery-server:8761/eureka:
     depends_on:
+      zuul-gateway:
+        condition: service_started
       mysql:
         condition: service_started
       auth:
