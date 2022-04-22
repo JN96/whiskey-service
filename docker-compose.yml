@@ -4,12 +4,13 @@ services:
     build: zuul-gateway
     container_name: zuul_gateway
     ports:
-      - "8886:8080" # map internal 8080 to external 9000
+      - "8886:8080" # map internal 8080 to external 8886
     environment:
-      server.port=8080:
+      server.port=8886:
       eureka.client.serviceUrl.defaultZone=http://eureka-discovery-server:8761/eureka:
-      zuul.routes.whiskeyapi=/whiskeyapi/**:
-      zuul.routes.whiskeyauth=/whiskeyauth/**:
+      zuul.routes.whiskeyapi=http://api:8080/whiskeyapi/**:
+      zuul.routes.whiskeyapi=http://api-replica:8080/whiskeyapi/**:
+      zuul.routes.whiskeyauth=http://auth:8080/whiskeyauth/**:
   mysql:
     build: docker/mysql
     container_name: whiskey_service_database
